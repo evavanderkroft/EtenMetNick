@@ -7,7 +7,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Recepten</title>
+        <title>Login</title>
 
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
 
@@ -16,7 +16,7 @@
     <div class="flex-center position-ref full-height">
             <div class="content">
                 <div class="title">
-                    Recepten!
+                    Log in!
                 </div>
 
                 <div class="links">
