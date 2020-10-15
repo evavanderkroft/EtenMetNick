@@ -13,6 +13,7 @@
 
     </head>
     <body>
+    <div class="container">
     @section('content')
         <div class="flex-center position-ref full-height">
             @if (Route::has('login'))
@@ -31,7 +32,7 @@
 
             <div class="content">
                 <div class="title">
-                    Eten met Nick
+                    Voer met nick
                 </div>
 
                 <div class="description">
@@ -46,6 +47,11 @@
                 </div>
             </div>
         </div>
+        @endsection
+
+    </div>
+
+    @section('footer')
         @endsection
     </body>
 </html>

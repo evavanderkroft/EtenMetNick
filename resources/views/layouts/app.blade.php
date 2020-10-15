@@ -25,12 +25,12 @@
             margin:10px;
         }
 
-.btn{
-    margin:5px;
-}
+        .btn{
+            margin:5px;
+        }
 
         .full-height {
-            height: 100vh;
+            height: 80vh;
         }
 
         .full-height2 {
@@ -74,12 +74,42 @@
         .m-b-md {
             margin-bottom: 30px;
         }
+
+        .footer{
+            background-color:#636b6f;
+            color: white;
+            bottom:0;
+            width:100%;
+            height: 20vh;
+            text-align: center;
+            position: absolute;
+        }
+
+
     </style>
+
 </head>
 <body>
 <div class="content">
     @yield('content')
 </div>
+<div class="footer">
+    @yield('footer')
+    <footer class="container py-5 footer">
+        <div class="row">
+            <div class="col-6 col-md">
+                <h5>Features</h5>
+                <ul class="list-unstyled text-small">
+                    <li><a class="text-white" href="#">Cool stuff</a></li>
+                    <li><a class="text-white" href="#">Random feature</a></li>
+                    <li><a class="text-white" href="#">Team feature</a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+</div>
+
+
 
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
