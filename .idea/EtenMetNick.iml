@@ -114,7 +114,9 @@
       <excludeFolder url="file://$MODULE_DIR$/EtenMetNick/vendor/vlucas/phpdotenv" />
       <excludeFolder url="file://$MODULE_DIR$/EtenMetNick/vendor/voku/portable-ascii" />
       <excludeFolder url="file://$MODULE_DIR$/EtenMetNick/vendor/webmozart/assert" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/laravel/homestead" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/laravel/ui" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/yaml" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

@@ -32,7 +32,7 @@
 
             <div class="content">
                 <div class="title">
-                    Voer met nick
+                    Eten met nick
                 </div>
 
                 <div class="description">

@@ -20,3 +20,11 @@ Route::get('/', function () {
 Route::get('recipe', 'RecipeController@show') ->name('recipe');
 Route::get('newAccount', "newAccountController@show") ->name('newAccount');
 Route::get('Login', "loginController@show") ->name('login');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
