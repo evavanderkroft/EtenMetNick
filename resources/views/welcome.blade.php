@@ -15,22 +15,7 @@
     <body>
     <div class="container">
     @section('content')
-        <div class="flex-center position-ref full-height">
-            @if (Route::has('login'))
-                <div class="top-right links">
-                    @auth
-                        <a href="{{ url('/home') }}">Home</a>
-                    @else
-                        <a href="{{ route('login') }}">Login</a>
-
-                        @if (Route::has('register'))
-                            <a href="{{ route('register') }}">Register</a>
-                        @endif
-                    @endauth
-                </div>
-            @endif
-
-            <div class="content">
+            <div class="content main">
                 <div class="title">
                     Eten met nick
                 </div>
@@ -41,7 +26,7 @@
 
                 <div class="links">
                     <a href="{{route('login')}}">inloggen</a>
-                    <a href="{{route('newAccount')}}">account aanmaken</a>
+                    <a href="{{route('register')}}">account aanmaken</a>
                     <a href="{{route('recipe')}}">Recepten</a>
 
                 </div>
@@ -50,7 +35,6 @@
         @endsection
 
     </div>
-
     @section('footer')
         @endsection
     </body>
