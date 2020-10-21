@@ -4938,6 +4938,7 @@ input[type=button].btn-block {
   display: flex;
   flex-direction: column;
   min-width: 0;
+  height: 100%;
   word-wrap: break-word;
   background-color: #fff;
   background-clip: border-box;
@@ -10958,12 +10959,19 @@ body {
 
 .links > a {
   color: #636b6f;
-  padding: 0 25px;
+  padding: 15px;
   font-size: 13px;
   font-weight: 600;
   letter-spacing: 0.1rem;
   text-decoration: none;
   text-transform: uppercase;
+  background-color: #7ea2b4;
+  border-radius: 5px;
+  margin: 10px;
+}
+
+.links > a:hover {
+  background-color: white;
 }
 
 .m-b-md {

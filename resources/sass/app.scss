@@ -18,6 +18,7 @@ html, body {
     justify-content: center;
 }
 
+
 .form-row, .form-group{
     color: #FFFFFF;
     margin:10px;
@@ -61,12 +62,18 @@ html, body {
 
 .links > a {
     color: #636b6f;
-    padding: 0 25px;
+    padding: 15px;
     font-size: 13px;
     font-weight: 600;
     letter-spacing: .1rem;
     text-decoration: none;
     text-transform: uppercase;
+    background-color: #7ea2b4;
+    border-radius: 5px;
+    margin: 10px;
+    &:hover{
+      background-color:white;
+    }
 }
 
 .m-b-md {

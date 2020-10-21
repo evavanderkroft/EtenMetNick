@@ -17,9 +17,11 @@ Route::get('/', function () {
     return view('welcome');
 })->name('welcome');
 
-Route::get('recipe', 'RecipeController@show') ->name('recipe');
+//Route::get('recipe', 'RecipeController@show') ->name('recipe');
 Route::get('newAccount', "newAccountController@show") ->name('newAccount');
 Route::get('Login', "loginController@show") ->name('login');
+
+Route::resource('/recipe','RecipeController');
 
 Auth::routes();
 

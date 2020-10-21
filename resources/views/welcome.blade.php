@@ -27,7 +27,7 @@
                 <div class="links">
                     <a href="{{route('login')}}">inloggen</a>
                     <a href="{{route('register')}}">account aanmaken</a>
-                    <a href="{{route('recipe')}}">Recepten</a>
+                    <a href="{{route('recipe.index')}}">Recepten</a>
 
                 </div>
             </div>
