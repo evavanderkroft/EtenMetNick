@@ -19,7 +19,22 @@
 {{--                            <p class="card-text">{{$recipe->description}}</p>--}}
                         </div>
                         <div class="card-footer">
-                            <small class="text-muted"> <a href="#" class="btn btn-primary">Go somewhere</a></small>
+                            <small class="text-muted"> <a href="recipe/{{$recipe->id}}" class="btn btn-primary">Naar het recept!</a></small>
+                            @if(Auth::user()->id == $recipe->user_id)
+                                <form method="post" action="{{route('recipe.update', $recipe->id)}}">
+                                    @csrf @method('PATCH')
+                                    <button class="btn btn-primary" type="submit">edit2</button>
+                                </form>
+
+{{--                            <small class="text-muted"><a href= class="btn btn-primary">Edit</a></small>--}}
+
+                                <form method="post" action="{{route('recipe.destroy', $recipe->id)}}">
+                                @csrf @method('DELETE')
+                                    <button class="btn btn-primary" type="submit">Verwijderen</button>
+                                </form>
+                        </div>
+{{--                            <small class="text-muted"><a  class="btn btn-primary">delete</a></small>--}}
+                                @endif
                         </div>
                     </div>
                     </div>
@@ -33,6 +48,17 @@
             </div>
         </div>
     </div>
+
+    <div class="field is-grouped">
+        @if(Auth::user()->id == $recipe->user_id)
+            <p class="control">
+                <a class="button is-primary" href="/recipe/{{$recipe->id}}/edit">Edit</a>
+            </p>
+            <p class="control">
+                <a class="button is-primary is-danger"
+                   href="/recipe/{{$recipe->id}}/delete">Delete</a>
+            </p>
+    @endif
 {{--    </div>--}}
 @endsection
 

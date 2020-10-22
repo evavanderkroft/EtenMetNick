@@ -72,11 +72,12 @@ return view('recipes.index',compact('recipes'));
      */
     public function edit(Recipe $recipe)
     {
-      //
+        return view('recipes.edit', compact('recipe'));
     }
 
-    public function show(){
-        return view('recipe');
+    public function show($id){
+        $recipe = Recipe::find($id);
+        return view('/recipes.show', compact('recipe'));
     }
 
     /**
@@ -86,19 +87,39 @@ return view('recipes.index',compact('recipes'));
      *  @param \App\Recipe $recipe
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Recipe $recipe)
+    public function update(Request $request, Recipe $recipe
+//                           $id
+    )
     {
-       //
+        $request->validate([
+            'title' => ['required', 'max:255'],
+            'short_description' => ['required', 'max:225'],
+            'description' => ['required', 'max:255'],
+            'img' => 'required',
+
+        ]);
+
+        $recipe->update(request(['title', 'short_description', 'description', 'img']));
+
+//        $recipe=Recipe::find($id);
+//        $recipe->title = $request->get('title');
+//        $recipe->short_description = $request->get('short_description');
+//        $recipe->description = $request->get('description');
+//        $recipe->img = $request->get('img');
+//        $recipe->save();
+        return redirect('/recipe')->with('succes!', 'recept is aangepast');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param \App\Product $product
+     * @param \App\Recipe $recipe
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Recipe $recipe)
+    public function destroy($id)
     {
-        //
+        $recipe=Recipe::find($id);
+        $recipe->delete();
+        return redirect('/recipe');
     }
 }
