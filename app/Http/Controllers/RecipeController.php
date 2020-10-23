@@ -87,19 +87,20 @@ return view('recipes.index',compact('recipes'));
      *  @param \App\Recipe $recipe
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Recipe $recipe
-//                           $id
+    public function update(Request $request,
+                            Recipe $recipe
+                         // $id
     )
     {
-        $request->validate([
-            'title' => ['required', 'max:255'],
-            'short_description' => ['required', 'max:225'],
-            'description' => ['required', 'max:255'],
-            'img' => 'required',
+//        dd($request);
 
+        $request->validate([
+            'title'=>'required|max:255',
+            'description'=>'required|max:1000',
+            'short_description'=>'required|max:255',
         ]);
 
-        $recipe->update(request(['title', 'short_description', 'description', 'img']));
+//        dd("hoi");
 
 //        $recipe=Recipe::find($id);
 //        $recipe->title = $request->get('title');
@@ -107,6 +108,7 @@ return view('recipes.index',compact('recipes'));
 //        $recipe->description = $request->get('description');
 //        $recipe->img = $request->get('img');
 //        $recipe->save();
+        $recipe->update(request(['title', 'description', 'short_description']));
         return redirect('/recipe')->with('succes!', 'recept is aangepast');
     }
 

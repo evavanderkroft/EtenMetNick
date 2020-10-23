@@ -37,34 +37,44 @@
             </div>
 
 
-            <label class="label">Upload your photo</label>
-            <div class="file field has-name is-boxed">
-                <label class="file-label">
-                <span class="file-cta">
-                    <span class="file-icon">
-                        <i class="fas fa-upload"></i>
-                    </span>
-                    <span class="file-label">
-                        Your photo
-                    </span>
-                </span>
-                    <span class="file-name">
-                    {{ $recipe->image }}
-                </span>
-                </label>
-            </div>
+{{--            <label class="label">Upload your photo</label>--}}
+{{--            <div class="file field has-name is-boxed">--}}
+{{--                <label class="file-label">--}}
+{{--                <span class="file-cta">--}}
+{{--                    <span class="file-icon">--}}
+{{--                        <i class="fas fa-upload"></i>--}}
+{{--                    </span>--}}
+{{--                    <span class="file-label">--}}
+{{--                        Your photo--}}
+{{--                    </span>--}}
+{{--                </span>--}}
+{{--                    <span class="file-name">--}}
+{{--                    {{ $recipe->image }}--}}
+{{--                </span>--}}
+{{--                </label>--}}
+{{--            </div>--}}
 
-            <div class="field is-grouped">
-                <div class="control">
-                    <button class="button is-link" type="submit">Submit</button>
+            <div>
+                <div>
+                    <button class="btn btn-primary" type="submit">Submit</button>
                 </div>
             </div>
+            <div>
+                <button class="btn btn-primary" type="submit">Cancel</button>
+            </div>
         </form>
-        <div class="control">
-            <button class="button is-text">Cancel</button>
+
+    </div>
+    </div>
+    @if ($errors->any())
+        <div>
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
         </div>
-    </div>
-    </div>
+    @endif
 
 @endsection
 
