@@ -31,6 +31,8 @@ Route::get('Login', "loginController@show") ->name('login');
 
 
 Auth::routes();
-Route::resource('/home', 'HomeController');
+//Route::resource('/home', 'HomeController');
+Route::resource('/home', 'HomeController', ['only' => ['index', 'edit','update']]);
+//Route::put('/home', 'HomeController@update')->name('home.update');
 Route::get('admin/routes', 'HomeController@admin')->middleware('admin');
 //Route::get('home', 'HomeController@edit')->name('homeEdit');

@@ -15,8 +15,8 @@
 
                         <h4> pas uw gegevens aan:</h4>
 
-                        <form class="box" method="POST" action={{route('home.index')}} enctype="multipart/form-data">
-{{--                            @method('PUT')--}}
+                        <form class="box" method="POST" action={{route('home.update', Auth::user()->id)}} enctype="multipart/form-data">
+                         @method('PATCH')
                             @csrf
 
                             <div class="field">

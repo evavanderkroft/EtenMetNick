@@ -10,7 +10,7 @@
 
         {{-- {{ Auth::user()->id }} --}}
         <form class="box" method="POST" action="/recipe/{{$recipe->id}}" enctype="multipart/form-data">
-            @method('PATCH')
+            @method('GET')
             @csrf
 
             <div class="field">

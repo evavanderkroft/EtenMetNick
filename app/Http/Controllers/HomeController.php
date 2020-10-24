@@ -28,7 +28,7 @@ class HomeController extends Controller
 
         $user = user::where('id', Auth::user()->id)->first();
 
-        return view('home', compact('user')); dd($user);
+        return view('home', compact('user'));
     }
 
     public function edit(User $user)
@@ -36,29 +36,47 @@ class HomeController extends Controller
         return view('home', compact('user'));
     }
 
-    public function store(Request $request)
+//    public function store(Request $request)
+//    {
+//        User::create([
+////            'id' => Auth::user()->id,
+//            'name' => $request->name,
+//            'email' => $request->email,
+//            'password' =>$request->password
+//        ]);
+////        dd($request);
+//        return redirect('home');
+//    }
+
+    public function update(User $user,Request $request, $id)
     {
-        User::create([
-            'id' => Auth::user()->id,
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' =>$request->password
+//        dd($id);
+
+//        $this->validate($request, [
+//            'total_paid' => 'required|numeric',
+//        ]);
+
+        $user = User::findOrFail($id);
+        $user->update([
+            'name' => $request->input('name'),
+            'email' => $request->input('email'),
         ]);
-        return redirect('/home', compact('user'));
-    }
+//        return redirect()
+//            ->route('/home');
 
-    public function update(User $user, Request $request)
-    {
-//        dd($request);
-
-        $request->validate([
-            'name'=>'required|max:255',
-            'email'=>'required|max:1000',
-            'password'=>'required|max:255',
-        ]);
-
-        $user->update(request(['name', 'email', 'password']));
-        return redirect('/home')->with('succes!', 'gegevens zijn aangepast');
+//        $request->validate([
+//            'name'=>'required|max:255',
+//            'email'=>'required|max:1000',
+//            'password'=>'required|max:255',
+//        ]);
+//        $user = user::where('id', Auth::user()->id)->first();
+//        $user->name = $request->name;
+//        $user->email = $request->email;
+//        $user->password = $request->password;
+//        $user->save();
+//
+////        $user->update(request(['name', 'email', 'password']));
+        return redirect('home')->with('success', 'gegevens zijn aangepast');
     }
 
     public function admin(User $user)
