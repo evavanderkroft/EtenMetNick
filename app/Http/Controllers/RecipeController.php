@@ -89,7 +89,7 @@ return view('recipes.index',compact('recipes'));
      */
     public function update(Request $request,
                             Recipe $recipe
-                         // $id
+//                           ,$id
     )
     {
 //        dd($request);
@@ -100,6 +100,12 @@ return view('recipes.index',compact('recipes'));
             'short_description'=>'required|max:255',
         ]);
 
+//        $recipe = Recipe::find($id);
+//        $recipe->update([
+//            'title' => $request->input('title'),
+//            'description' => $request->input('description'),
+//            'short_description' => $request->input('short_description')
+//        ]);
 //        dd("hoi");
 
 //        $recipe=Recipe::find($id);
@@ -108,6 +114,7 @@ return view('recipes.index',compact('recipes'));
 //        $recipe->description = $request->get('description');
 //        $recipe->img = $request->get('img');
 //        $recipe->save();
+
         $recipe->update(request(['title', 'description', 'short_description']));
         return redirect('/recipe')->with('succes!', 'recept is aangepast');
     }

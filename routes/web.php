@@ -17,7 +17,7 @@ Route::get('/', function () {
     return view('welcome');
 })->name('welcome');
 
-Route::resource('/recipe','RecipeController');
+Route::resource('/recipe','RecipeController',  ['only' => ['index', 'edit','update', 'store', 'destroy', 'create', 'show' ]]);
 //Route::get('recipe', 'RecipeController@show') ->name('recipe');
 Route::get('newAccount', "newAccountController@show") ->name('newAccount');
 Route::get('Login', "loginController@show") ->name('login');

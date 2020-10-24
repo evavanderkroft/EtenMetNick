@@ -65,9 +65,15 @@
                                                      document.getElementById('logout-form').submit();">
                                         {{ __('Logout') }}
                                     </a>
-                                    <a class="dropdown-item" href="{{ route('home.index') }}">
-                                        {{ __('Account aanpassen') }}
-                                    </a>
+                                    @if(auth()->user()->is_admin == 1)
+                                        <a class="dropdown-item" href="{{ route('home.index') }}">
+                                            {{ __('Admin pagina') }}
+                                        </a>
+                                    @else
+                                        <a class="dropdown-item" href="{{ route('home.index') }}">
+                                            {{ __('Account aanpassen') }}
+                                        </a>
+                                    @endif
 
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                         @csrf
