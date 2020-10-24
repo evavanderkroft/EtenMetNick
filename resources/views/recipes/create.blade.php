@@ -3,7 +3,6 @@
 @section('content')
 
     <h1 class="title">Maak een nieuw recept aan!</h1>
-    <h2 class="subtitle">Upload your new photo to add on your post board.</h2>
     <form method="POST" action="{{route('recipe.store')}}" enctype="multipart/form-data">
         @csrf
 

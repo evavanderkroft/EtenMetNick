@@ -31,5 +31,6 @@ Route::get('Login', "loginController@show") ->name('login');
 
 
 Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
+Route::resource('/home', 'HomeController');
+Route::get('admin/routes', 'HomeController@admin')->middleware('admin');
+//Route::get('home', 'HomeController@edit')->name('homeEdit');
