@@ -79,14 +79,14 @@ class HomeController extends Controller
         return redirect('home')->with('success', 'gegevens zijn aangepast');
     }
 
-    public function admin(User $user)
-
-    {
-        $user = User::with('recipes')->get();
-        // dd($users);
-
-        return view('admin', compact('user'));
-    }
+//    public function admin(User $user)
+//
+//    {
+//        $user = User::with('recipes')->get();
+//        // dd($users);
+//
+//        return view('admin', compact('user'));
+//    }
 
 }
 

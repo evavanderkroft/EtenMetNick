@@ -66,7 +66,7 @@
                                         {{ __('Logout') }}
                                     </a>
                                     @if(auth()->user()->is_admin == 1)
-                                        <a class="dropdown-item" href="{{ route('home.index') }}">
+                                        <a class="dropdown-item" href="{{ route('admin.index') }}">
                                             {{ __('Admin pagina') }}
                                         </a>
                                     @else

@@ -18,6 +18,7 @@ class CreateRecipesTable extends Migration
             $table->string('title');
             $table->text('short_description');
             $table->text('description');
+            $table->string('category')->default('none');
             $table->unsignedInteger('user_id');
             $table->string('image')->default('hoi');
             $table->timestamps();

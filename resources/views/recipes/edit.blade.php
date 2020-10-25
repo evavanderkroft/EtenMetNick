@@ -36,6 +36,18 @@
                 </div>
             </div>
 
+            <div class="form-group">
+                <label for="exampleFormControlSelect1">Categorie</label>
+                <select class="form-control" id="exampleFormControlSelect1" name="category"  value="{{$recipe->category }}">
+                    <option>None</option>
+                    <option>Frans</option>
+                    <option>spaans</option>
+                    <option>Chinees</option>
+                    <option>Duits</option>
+                    <option>Italiaans</option>
+                </select>
+            </div>
+
 
 {{--            <label class="label">Upload your photo</label>--}}
 {{--            <div class="file field has-name is-boxed">--}}

@@ -8,9 +8,9 @@
                 <div class="card-header">{{ __('Dashboard') }}</div>
 
                 @if(Auth::check())
-                    @if(auth()->user()->is_admin == 1)
-                        <a href="{{url('admin/routes')}}">Secret Admin Page</a>
-                    @else
+{{--                    @if(auth()->user()->is_admin == 1)--}}
+{{--                        <a href="{{url('admin/routes')}}">Secret Admin Page</a>--}}
+{{--                    @else--}}
                         Hi {{ Auth::user()->name }}
 
                         <h4> pas uw gegevens aan:</h4>
@@ -51,9 +51,8 @@
                             </div>
                         </form>
                     @endif
-                @else
-                    log in.
-                @endif
+
+
 
                 <div class="card-body">
                     @if (session('status'))

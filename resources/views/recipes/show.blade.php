@@ -55,8 +55,7 @@
                         <time class="is-right" datetime="{{ $recipe->created_at }}">{{ $recipe->created_at }}</time>
                     </div>
                 </div>
-                <footer>
-                    <div class="field is-grouped">
+
 {{--                        @if($photo->likes->firstWhere('user_id', Auth::user()->id))--}}
 {{--                            <p class="control">--}}
 {{--                            <form action="{{route('like.delete', $photo->id)}}" method="post">--}}
@@ -80,14 +79,8 @@
 {{--                            </form>--}}
 {{--                            </p>--}}
 {{--                        @endif--}}
-                        @if(Auth::user()->id == $recipe->user_id)
-                            <p class="control">
-                                <a class="button is-primary" href="/photos/{{$recipe->id}}/edit">Edit</a>
-                            </p>
-                        @endif
 
-                    </div>
-                </footer>
+
 
 
 

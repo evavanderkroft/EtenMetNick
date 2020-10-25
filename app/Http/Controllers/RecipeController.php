@@ -47,14 +47,21 @@ return view('recipes.index',compact('recipes'));
      */
     public function store(Request $request)
     {
+
+
+
        Recipe::create([
            'user_id' => Auth::user()->id,
             'title' => $request->title,
             'short_description' => $request->short_description,
-            'description' =>$request->description
+            'description' =>$request->description,
+           'category' =>$request->category,
 //        'image' =>
        ]);
+        dd($request->category);
        return redirect('/recipe');
+
+
     }
 
     /**
@@ -115,7 +122,7 @@ return view('recipes.index',compact('recipes'));
 //        $recipe->img = $request->get('img');
 //        $recipe->save();
 
-        $recipe->update(request(['title', 'description', 'short_description']));
+        $recipe->update(request(['title', 'description', 'short_description', 'category']));
         return redirect('/recipe')->with('succes!', 'recept is aangepast');
     }
 
@@ -130,5 +137,9 @@ return view('recipes.index',compact('recipes'));
         $recipe=Recipe::find($id);
         $recipe->delete();
         return redirect('/recipe');
+    }
+
+    public function categories(){
+
     }
 }
