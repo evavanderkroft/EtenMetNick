@@ -139,7 +139,10 @@ return view('recipes.index',compact('recipes'));
         return redirect('/recipe');
     }
 
-    public function categories(){
-
+    public function category(Recipe $recipe, Request $request){
+dd($request);
+$recipes =Recipe::where('category', $request->category )->get();
+dd($recipes);
+return view('recipes.index', compact('recipes'));
     }
 }

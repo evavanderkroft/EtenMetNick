@@ -7,18 +7,35 @@
             <div class="title">
                 Recepten!
             </div>
-            <div class="form-group">
-                <label for="exampleFormControlSelect1">Example select</label>
-                <select class="form-control" id="exampleFormControlSelect1">
-
-                    <option>1</option>
-                    <option></option>
-                    <option>3</option>
-                    <option>4</option>
-                    <option>5</option>
-
-                </select>
-            </div>
+            <form method="POST" action="{{route('recipe.category')}}" enctype="multipart/form-data">
+            @csrf
+                <div class="form-group">
+                    <label for="exampleFormControlSelect1">Example select</label>
+                    <select class="form-control" id="exampleFormControlSelect1" name="category">
+                        <option>None</option>
+                        <option>Frans</option>
+                        <option>spaans</option>
+                        <option>Chinees</option>
+                        <option>Duits</option>
+                        <option>Italiaans</option>
+                    </select>
+                        <div class="control">
+                            <button class="button is-link" type="submit">Submit</button>
+                        </div>
+                </div>
+            </form>
+{{--            <div class="input-group mb-3">--}}
+{{--            <div class="input-group">--}}
+{{--                <select class="custom-select" id="inputGroupSelect04">--}}
+{{--                    <option selected>Choose...</option>--}}
+{{--                    <option value="1">One</option>--}}
+{{--                    <option value="2">Two</option>--}}
+{{--                    <option value="3">Three</option>--}}
+{{--                </select>--}}
+{{--                <div class="input-group-append">--}}
+{{--                    <button class="btn btn-outline-secondary" type="button">Button</button>--}}
+{{--                </div>--}}
+{{--            </div>--}}
         </div>
 
         <div class="card-deck">
