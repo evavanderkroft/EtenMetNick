@@ -19,6 +19,12 @@ class RecipeController extends Controller
     public function index()
     {
      $recipes = Recipe::All();
+//     $search = Recipe::get('title');
+//     $recipes=Recipe::search()->orderBy('name')->paginate(20);
+
+//     $recipeSearch = Recipe::where('title', 'like', '%'.$search.'%')
+//         ->orderBy('recipe')
+//         ->paginate(20);
 return view('recipes.index',compact('recipes'));
 
 //        $recipes = Recipe::table('recipes')->get();
@@ -58,7 +64,7 @@ return view('recipes.index',compact('recipes'));
            'category' =>$request->category,
 //        'image' =>
        ]);
-        dd($request->category);
+//        dd($request->category);
        return redirect('/recipe');
 
 
@@ -140,9 +146,26 @@ return view('recipes.index',compact('recipes'));
     }
 
     public function category(Recipe $recipe, Request $request){
-dd($request);
+//dd($request);
 $recipes =Recipe::where('category', $request->category )->get();
-dd($recipes);
+//dd($recipes);
 return view('recipes.index', compact('recipes'));
     }
+
+    public function search(Recipe $recipe, Request $request){
+$search = $request->get('search');
+
+$recipes=Recipe::where('title', 'like', '%'.$request->search.'%')->get();
+//        dd($request->search);
+return view('recipes.index', compact('recipes'));
 }
+//
+//    public function search($q){
+////$search = $request->get('search');
+////        dd($request);
+//        return empty(request()->search) ? $q :$q->where('title', 'like', '%'.request()->search.'%');
+////        $recipes=Recipe::where('name', 'like', '%', $request->get('search'), '%');
+////        return view('recipes.index', compact('recipes'));
+//    }
+}
+

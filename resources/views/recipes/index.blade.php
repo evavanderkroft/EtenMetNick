@@ -19,10 +19,19 @@
                         <option>Duits</option>
                         <option>Italiaans</option>
                     </select>
-                        <div class="control">
-                            <button class="button is-link" type="submit">Submit</button>
-                        </div>
+                    <div class="control">
+                        <button class="button is-link" type="submit">Submit</button>
+                    </div>
                 </div>
+            </form>
+
+            <form method="GET" action= {{route('recipe.search')}}>
+            <div class="input-group mb-3">
+                <input type="text" class="form-control" name="search" placeholder="zoeken" aria-label="Zoeken" aria-describedby="button-addon2">
+                <div class="control">
+                    <button class="button is-link" type="submit">Submit</button>
+                </div>
+            </div>
             </form>
 {{--            <div class="input-group mb-3">--}}
 {{--            <div class="input-group">--}}
@@ -62,7 +71,9 @@
         <div class="content">
             <div class="links">
                 <a href="{{route('welcome')}}">terug</a>
+                @if(auth()->user()->is_admin == 1)
                 <a href="{{route('recipe.create')}}">creeer een recept</a>
+                @endif
             </div>
         </div>
     </div>

@@ -17,9 +17,13 @@ Route::get('/', function () {
     return view('welcome');
 })->name('welcome');
 
-Route::resource('/recipe','RecipeController', ['index', 'edit','update', 'store', 'destroy', 'create', 'show', ]);
-//Route::post('recipe/category', 'RecipeController@category');
-Route::POST('/recipe', 'RecipeController@category')->name('recipe.category');
+Route::post('recipe/category', 'RecipeController@category')->name('recipe.category');
+Route::get('recipe/search', 'recipeController@search')->name('recipe.search');
+Route::resource('/recipe','RecipeController');
+//    ->only( ['index', 'edit','update', 'destroy', 'create', 'show' ]);
+
+//Route::POST('/recipe', 'RecipeController@category')->name('recipe.category');
+//Route::POST('/recipe', 'RecipeController@store')->name('recipe.store');
 //Route::get('recipe', 'RecipeController@show') ->name('recipe');
 Route::get('newAccount', "newAccountController@show") ->name('newAccount');
 Route::get('Login', "loginController@show") ->name('login');
