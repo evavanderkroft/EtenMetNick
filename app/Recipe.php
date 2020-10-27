@@ -16,6 +16,7 @@ class Recipe extends Model
         'short_description',
         'user_id',
         'category',
+        'is_available',
         'image'
     ];
 

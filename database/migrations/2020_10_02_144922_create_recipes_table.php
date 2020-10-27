@@ -21,6 +21,7 @@ class CreateRecipesTable extends Migration
             $table->string('category')->default('none');
             $table->unsignedInteger('user_id');
             $table->string('image')->default('hoi');
+            $table->boolean('is_available')->nullable()->default(0);
             $table->timestamps();
         });
     }
