@@ -21,13 +21,13 @@ class Recipe extends Model
         'image'
     ];
 
-    public static function table(string $string)
-    {
-    }
 
 
     public function User(){
         return $this->belongsTo(User::class);
 }
 
+public function Saved(){
+        return $this->belongsToMany(Saved::class);
+}
 }

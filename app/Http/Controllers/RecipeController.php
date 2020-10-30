@@ -176,7 +176,7 @@ class RecipeController extends Controller
     {
         $search = $request->get('search');
 
-        $recipes = Recipe::where('title', 'like', '%' . $request->search . '%')
+        $recipes = Recipe::where('title', 'like', '%' . $request->search . '%')->orWhere('short_description', 'like', '%' . $request->search . '%')
             ->where('is_available', 1)
             ->get();
 //        dd($request->search);
@@ -205,25 +205,25 @@ class RecipeController extends Controller
         }
     }
 
-    public function Switchsaved(Recipe $recipe, Request $request, $id)
-    {
-        $Saved = $request->input('is_saved');
-        $recipe = Recipe::find($id);
-
-        if (isset($Saved)) {
-            // Feature recipe
-            $recipe->is_saved = 1;
-            $recipe->save();
-
-            return redirect('/index')->with('success', 'This recipe is now saved');
-        } else {
-            // Unfeature recipe
-            $recipe->is_saved = 0;
-            $recipe->save();
-
-            return redirect('/index')->with('warning', 'This recipe is not saved anymore');
-        }
-//        return view('recipes.saved');
-    }
+//    public function Switchsaved(Recipe $recipe, Request $request, $id)
+//    {
+//        $Saved = $request->input('is_saved');
+//        $recipe = Recipe::find($id);
+//
+//        if (isset($Saved)) {
+//            // Feature recipe
+//            $recipe->is_saved = 1;
+//            $recipe->save();
+//
+//            return redirect('/index')->with('success', 'This recipe is now saved');
+//        } else {
+//            // Unfeature recipe
+//            $recipe->is_saved = 0;
+//            $recipe->save();
+//
+//            return redirect('/index')->with('warning', 'This recipe is not saved anymore');
+//        }
+////        return view('recipes.saved');
+//    }
 }
 

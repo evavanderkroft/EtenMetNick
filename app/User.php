@@ -14,6 +14,11 @@ class User extends Authenticatable
     public function Recipes(){
         return $this->hasMany('App\Recipe');
     }
+
+    public function HasSaved(){
+        return $this->hasMany('App\saved');
+    }
+
     /**
      * The attributes that are mass assignable.
      *

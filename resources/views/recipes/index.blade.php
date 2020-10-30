@@ -60,9 +60,10 @@
                         </div>
                         <div class="card-footer">
                             <small class="text-muted"> <a href="recipe/{{$recipe->id}}" class="btn btn-primary">Naar het recept!</a></small>
-
+{{--                            @if(auth()->user()->is_admin == 0)--}}
                                 <label class="switch ml-3">
-                                    <input name="is_available" value="{{ $recipe->is_saved}}" type="checkbox" onclick='submit()' @if( $recipe->is_saved) checked @endif>
+                                    @php /** @var App\Saved $saved */ @endphp
+                                    <input name="is_available" value="{{ $recipe->Saved}}" type="checkbox" onclick='submit()' @if( $recipe->saved) checked @endif>
                                     <span class="slider round"></span>
                                 </label>
                             </form>
