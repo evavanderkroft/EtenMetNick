@@ -60,11 +60,15 @@ class RecipeController extends Controller
     public function store(Request $request)
     {
         if (!$request->is_available) {
-            $isAvailable = 0;
+        $isAvailable = 0;
+    } else {
+        $isAvailable = 1;
+    }
+        if (!$request->is_saved) {
+            $isSaved = 0;
         } else {
-            $isAvailable = 1;
+            $isSaved = 1;
         }
-
 
         Recipe::create([
             'user_id' => Auth::user()->id,
@@ -73,6 +77,7 @@ class RecipeController extends Controller
             'description' => $request->description,
             'category' => $request->category,
             'is_available' => $isAvailable,
+            'is_saved'=> $isSaved
 //        'image' =>
         ]);
 //        dd($request->category);
@@ -198,6 +203,27 @@ class RecipeController extends Controller
 
             return redirect('/admin')->with('warning', 'This recipe is not featured anymore');
         }
+    }
+
+    public function Switchsaved(Recipe $recipe, Request $request, $id)
+    {
+        $Saved = $request->input('is_saved');
+        $recipe = Recipe::find($id);
+
+        if (isset($Saved)) {
+            // Feature recipe
+            $recipe->is_saved = 1;
+            $recipe->save();
+
+            return redirect('/index')->with('success', 'This recipe is now saved');
+        } else {
+            // Unfeature recipe
+            $recipe->is_saved = 0;
+            $recipe->save();
+
+            return redirect('/index')->with('warning', 'This recipe is not saved anymore');
+        }
+//        return view('recipes.saved');
     }
 }
 

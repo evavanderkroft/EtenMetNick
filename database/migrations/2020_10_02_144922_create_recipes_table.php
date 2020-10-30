@@ -22,6 +22,7 @@ class CreateRecipesTable extends Migration
             $table->unsignedInteger('user_id');
             $table->string('image')->default('hoi');
             $table->boolean('is_available')->nullable()->default(0);
+            $table->boolean('is_saved')->nullable()->default(0);
             $table->timestamps();
         });
     }

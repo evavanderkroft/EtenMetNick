@@ -17,6 +17,7 @@ class Recipe extends Model
         'user_id',
         'category',
         'is_available',
+        'is_saved',
         'image'
     ];
 

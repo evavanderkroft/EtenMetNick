@@ -19,6 +19,7 @@ Route::get('/', function () {
 
 Route::post('recipe/category', 'RecipeController@category')->name('recipe.category');
 Route::get('recipe/search', 'recipeController@search')->name('recipe.search');
+Route::get('recipe/saved', 'recipeController@Switchsaved')->name('recipe.Switchsaved');
 Route::post('recipe/available/{id}', 'recipeController@available')->name('recipe.available');
 Route::resource('/recipe','RecipeController');
 //    ->only( ['index', 'edit','update', 'destroy', 'create', 'show' ]);

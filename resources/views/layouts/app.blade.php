@@ -60,11 +60,15 @@
 
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
-                                       onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
-                                    </a>
+{{--                                    //Naar de opgeslagen recepten (alleen als gebruiker)--}}
+                                    @if(auth()->user()->is_admin == 0)
+                                        <a class="dropdown-item"
+                                            href="{{route('recipe.Switchsaved')}}"
+                                        >
+                                            {{ __('Opgeslagen recepten') }}</a>
+                                    @endif
+
+{{--                                    //naar de adminpagina als admin en naar de account aanpassen pagina als gebruiker--}}
                                     @if(auth()->user()->is_admin == 1)
                                         <a class="dropdown-item" href="{{ route('admin.index') }}">
                                             {{ __('Admin pagina') }}
@@ -74,6 +78,14 @@
                                             {{ __('Account aanpassen') }}
                                         </a>
                                     @endif
+
+{{--                                    //uitloggen voor zowel gebruiker als admin.--}}
+                                        <a class="dropdown-item" href="{{ route('logout') }}"
+                                           onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                                            {{ __('Logout') }}
+                                        </a>
+
 
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                         @csrf

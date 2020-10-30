@@ -88,5 +88,6 @@ class HomeController extends Controller
 //        return view('admin', compact('user'));
 //    }
 
+
 }
 
