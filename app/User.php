@@ -11,12 +11,9 @@ class User extends Authenticatable
 
     use Notifiable;
 
-    public function Recipes(){
-        return $this->hasMany('App\Recipe');
-    }
 
-    public function HasSaved(){
-        return $this->hasMany('App\saved');
+    public function Recipe(){
+        return $this->hasMany('App\Recipe');
     }
 
     /**

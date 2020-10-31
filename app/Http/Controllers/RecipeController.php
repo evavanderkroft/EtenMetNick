@@ -64,11 +64,11 @@ class RecipeController extends Controller
     } else {
         $isAvailable = 1;
     }
-        if (!$request->is_saved) {
-            $isSaved = 0;
-        } else {
-            $isSaved = 1;
-        }
+//        if (!$request->is_saved) {
+//            $isSaved = 0;
+//        } else {
+//            $isSaved = 1;
+//        }
 
         Recipe::create([
             'user_id' => Auth::user()->id,
@@ -76,8 +76,8 @@ class RecipeController extends Controller
             'short_description' => $request->short_description,
             'description' => $request->description,
             'category' => $request->category,
-            'is_available' => $isAvailable,
-            'is_saved'=> $isSaved
+            'is_available' => $isAvailable
+//            'is_saved'=> $isSaved
 //        'image' =>
         ]);
 //        dd($request->category);

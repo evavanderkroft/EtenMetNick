@@ -61,12 +61,13 @@
                         <div class="card-footer">
                             <small class="text-muted"> <a href="recipe/{{$recipe->id}}" class="btn btn-primary">Naar het recept!</a></small>
 {{--                            @if(auth()->user()->is_admin == 0)--}}
+                            @foreach($recipe->is_saved as $saved)
                                 <label class="switch ml-3">
-                                    @php /** @var App\Saved $saved */ @endphp
-                                    <input name="is_available" value="{{ $recipe->Saved}}" type="checkbox" onclick='submit()' @if( $recipe->saved) checked @endif>
+                                    <input name="is_available" value="{{ $recipe->$saved}}" type="checkbox" onclick='submit()' @if( $recipe->$saved) checked @endif>
                                     <span class="slider round"></span>
                                 </label>
-                            </form>
+{{--                            </form>--}}
+                                @endforeach
                         </div>
                     </div>
         </div>
