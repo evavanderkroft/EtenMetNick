@@ -15,6 +15,7 @@ class Authenticate extends Middleware
     protected function redirectTo($request)
     {
         if (! $request->expectsJson()) {
+            View::share([ 'currentUser' => $this->auth->user() ]);
             return route('login');
         }
     }

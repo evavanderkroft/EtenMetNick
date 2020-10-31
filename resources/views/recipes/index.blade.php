@@ -61,17 +61,25 @@
                         <div class="card-footer">
                             <small class="text-muted"> <a href="recipe/{{$recipe->id}}" class="btn btn-primary">Naar het recept!</a></small>
 {{--                            @if(auth()->user()->is_admin == 0)--}}
-                            @foreach($recipe->is_saved as $saved)
-                                <label class="switch ml-3">
-                                    <input name="is_available" value="{{ $recipe->$saved}}" type="checkbox" onclick='submit()' @if( $recipe->$saved) checked @endif>
-                                    <span class="slider round"></span>
-                                </label>
-{{--                            </form>--}}
-                                @endforeach
+{{--                            @foreach($recipes->like as $recipe)--}}
+
+                          <form method="post" action="{{route('recipe.like', $recipe->id)}}">
+                              @csrf
+                              <button type="button" class="btn btn-success">Success</button>
+                              <button type="button" class="btn btn-danger">Danger</button>
+
+{{--                                    <div class="form-group row">--}}
+{{--                                        <label class="switch ml-3">--}}
+{{--                                            <input name="is_liked" value="{{ $recipe->isLikedBy($user) }}" type="checkbox" onclick='submit()' @if( $recipe->isLikedBy($user)) checked @endif>--}}
+{{--                                            <span class="slider round"></span>--}}
+{{--                                        </label>--}}
+{{--                                    </div>--}}
+                                </form>
                         </div>
                     </div>
+            @endforeach
         </div>
-                @endforeach
+
 
 
 

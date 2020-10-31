@@ -26,27 +26,27 @@ class CreateRecipesTable extends Migration
             $table->timestamps();
         });
 
-        if(!Schema::hasTable('recipe_user')) {
-            Schema::create('recipe_user', function (Blueprint $table) {
-                //foreign key recipe_id
-                $table->unsignedBigInteger('recipe_id');
-                //foreign key user_id
-                $table->unsignedBigInteger('user_id');
-
-                //primary key
-                $table->primary(['recipe_id', 'user_id']);
-                //foreign keys
-                $table->foreign('recipe_id')->references('id')->on('recipes')
-                    ->onDelete('cascade');
-
-                $table->foreign('user_id')->references('id')->on('users')
-                    ->onDelete('cascade');
-
-                //timestamp
-                $table->timestamps();
-
-            });
-        };
+//        if(!Schema::hasTable('recipe_user')) {
+//            Schema::create('recipe_user', function (Blueprint $table) {
+//                //foreign key recipe_id
+//                $table->unsignedBigInteger('recipe_id');
+//                //foreign key user_id
+//                $table->unsignedBigInteger('user_id');
+//
+//                //primary key
+//                $table->primary(['recipe_id', 'user_id']);
+//                //foreign keys
+//                $table->foreign('recipe_id')->references('id')->on('recipes')
+//                    ->onDelete('cascade');
+//
+//                $table->foreign('user_id')->references('id')->on('users')
+//                    ->onDelete('cascade');
+//
+//                //timestamp
+//                $table->timestamps();
+//
+//            });
+//        };
     }
 
     /**
@@ -56,7 +56,7 @@ class CreateRecipesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('recipe_user');
+//        Schema::dropIfExists('recipe_user');
         Schema::dropIfExists('recipes');
     }
 }

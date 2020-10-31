@@ -25,14 +25,14 @@
             <td>{{$recipe->description}}</td>
             <td>{{$recipe->category}}</td>
                 <td><form method="post" action="{{route('recipe.available', $recipe->id)}}">
-                    @csrf
-                    <div class="form-group row">
-                        <label class="switch ml-3">
-                            <input name="is_available" value="{{ $recipe->is_available }}" type="checkbox" onclick='submit()' @if( $recipe->is_available) checked @endif>
-                            <span class="slider round"></span>
-                        </label>
-                    </div>
-                </form>
+                        @csrf
+                        <div class="form-group row">
+                            <label class="switch ml-3">
+                                <input name="is_available" value="{{ $recipe->is_available }}" type="checkbox" onclick='submit()' @if( $recipe->is_available) checked @endif>
+                                <span class="slider round"></span>
+                            </label>
+                        </div>
+                    </form>
                 </td>
             <td><small class="text-muted"><a href=/recipe/{{$recipe->id}}/edit class="btn btn-primary">Edit</a></small></td>
             <td>

@@ -19,7 +19,13 @@ class RecipeController extends Controller
 
     public function index(Recipe $recipe)
     {
-        $recipes = Recipe::Where('is_available', 1)->get();
+        $recipes = Recipe::Where('is_available', 1)
+            ->withLikes()
+            ->get();
+
+        $user = Auth::user();
+
+
 
 //        'title', 'like', '%' . $request->search . '%'
 //        dd($recipes);
@@ -29,7 +35,7 @@ class RecipeController extends Controller
 //     $recipeSearch = Recipe::where('title', 'like', '%'.$search.'%')
 //         ->orderBy('recipe')
 //         ->paginate(20);
-        return view('recipes.index', compact('recipes'));
+        return view('recipes.index', compact('recipes','user'));
 
 //        $recipes = Recipe::table('recipes')->get();
 
@@ -70,7 +76,7 @@ class RecipeController extends Controller
 //            $isSaved = 1;
 //        }
 
-        Recipe::create([
+      $recipe =  Recipe::create([
             'user_id' => Auth::user()->id,
             'title' => $request->title,
             'short_description' => $request->short_description,
@@ -80,6 +86,8 @@ class RecipeController extends Controller
 //            'is_saved'=> $isSaved
 //        'image' =>
         ]);
+//        $recipe->tags()->sync(request('tag'));
+
 //        dd($request->category);
         return redirect('/recipe');
 
@@ -202,6 +210,27 @@ class RecipeController extends Controller
             $recipe->save();
 
             return redirect('/admin')->with('warning', 'This recipe is not featured anymore');
+        }
+    }
+    public function Like(Recipe $recipe, Request $request, $id)
+    {
+//        dd($id);
+//        dd($request->all());
+        $Liked = $request->input('is_liked');
+        $recipe = Recipe::find($id);
+
+        if (isset($Liked)) {
+            // Feature recipe
+            $recipe->like(Auth::user());
+            $recipe->save();
+
+            return redirect('/recipe')->with('success', 'This recipe is now featured');
+        } else {
+            // Unfeature recipe
+            $recipe->dislike(Auth::user());
+            $recipe->save();
+
+            return redirect('/recipe')->with('warning', 'This recipe is not featured anymore');
         }
     }
 
