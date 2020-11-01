@@ -12,7 +12,9 @@ class User extends Authenticatable
     use Notifiable;
 
 
-    private $likes;
+    public function likes(){
+        return $this->hasMany(Like::class);
+    }
 
     public function Recipe(){
         return $this->belongsToMany('App\Recipe');

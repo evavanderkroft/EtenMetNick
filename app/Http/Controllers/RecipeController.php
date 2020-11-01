@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Recipe;
+use App\User;
 use Auth;
 
 class RecipeController extends Controller
@@ -26,6 +27,26 @@ class RecipeController extends Controller
         $user = Auth::user();
 
 
+        $user2 = User::where('id', $user->id)->first();
+       $userCreatedAt = $user2->created_at;
+       $datediv = now()->diffInDays($userCreatedAt);
+
+       if($datediv>=5)
+       {
+           $ShowLike = true;
+       }
+       else
+           {
+           $ShowLike= false;
+           }
+//
+//        $fdate = User::Where('created_at');
+//        $datetime1 = new DateTime($fdate);
+//        $datetime2 = new DateTime(date('Y/m/d'));
+//
+//        $interval = $datetime1->diff($datetime2);
+//        $days = $interval->format('%a');//now do whatever you like with $days
+//
 
 //        'title', 'like', '%' . $request->search . '%'
 //        dd($recipes);
@@ -35,7 +56,7 @@ class RecipeController extends Controller
 //     $recipeSearch = Recipe::where('title', 'like', '%'.$search.'%')
 //         ->orderBy('recipe')
 //         ->paginate(20);
-        return view('recipes.index', compact('recipes','user'));
+        return view('recipes.index', compact('recipes','user', 'ShowLike'));
 
 //        $recipes = Recipe::table('recipes')->get();
 
@@ -173,22 +194,52 @@ class RecipeController extends Controller
     public function category(Recipe $recipe, Request $request)
     {
 //dd($request);
+        $user = Auth::user();
+
+
+        $user2 = User::where('id', $user->id)->first();
+        $userCreatedAt = $user2->created_at;
+        $datediv = now()->diffInDays($userCreatedAt);
+
+        if($datediv>=5)
+        {
+            $ShowLike = true;
+        }
+        else
+        {
+            $ShowLike= false;
+        }
         $recipes = Recipe::where('category', $request->category)
             ->where('is_available', 1)
             ->get();
 //dd($recipes);
-        return view('recipes.index', compact('recipes'));
+        return view('recipes.index', compact('recipes', 'ShowLike'));
     }
 
     public function search(Recipe $recipe, Request $request)
     {
+        $user = Auth::user();
+
+
+        $user2 = User::where('id', $user->id)->first();
+        $userCreatedAt = $user2->created_at;
+        $datediv = now()->diffInDays($userCreatedAt);
+
+        if($datediv>=5)
+        {
+            $ShowLike = true;
+        }
+        else
+        {
+            $ShowLike= false;
+        }
         $search = $request->get('search');
 
         $recipes = Recipe::where('title', 'like', '%' . $request->search . '%')->orWhere('short_description', 'like', '%' . $request->search . '%')
             ->where('is_available', 1)
             ->get();
 //        dd($request->search);
-        return view('recipes.index', compact('recipes'));
+        return view('recipes.index', compact('recipes', 'ShowLike'));
     }
 
     public function available(Recipe $recipe, Request $request, $id)
@@ -212,26 +263,37 @@ class RecipeController extends Controller
             return redirect('/admin')->with('warning', 'This recipe is not featured anymore');
         }
     }
-    public function Like(Recipe $recipe, Request $request, $id)
-    {
-//        dd($id);
-//        dd($request->all());
-        $Liked = $request->input('is_liked');
-        $recipe = Recipe::find($id);
+//    public function Like(Recipe $recipe, Request $request, $id)
+//    {
+////        dd($id);
+////        dd($request->all());
+//        $Liked = $request->input('is_liked');
+//        $recipe = Recipe::find($id);
+//
+//        if (isset($Liked)) {
+//            // Feature recipe
+//            $recipe->like(Auth::user());
+//            $recipe->save();
+//
+//            return redirect('/recipe')->with('success', 'This recipe is now featured');
+//        } else {
+//            // Unfeature recipe
+//            $recipe->dislike(Auth::user());
+//            $recipe->save();
+//
+//            return redirect('/recipe')->with('warning', 'This recipe is not featured anymore');
+//        }
+//    }
 
-        if (isset($Liked)) {
-            // Feature recipe
-            $recipe->like(Auth::user());
-            $recipe->save();
+    public function storeLike(Recipe $recipe){
+        $recipe->like(auth()->user());
 
-            return redirect('/recipe')->with('success', 'This recipe is now featured');
-        } else {
-            // Unfeature recipe
-            $recipe->dislike(Auth::user());
-            $recipe->save();
+        return back();
+    }
+    public function destroyLike(Recipe $recipe){
+        $recipe->dislike(auth()->user());
 
-            return redirect('/recipe')->with('warning', 'This recipe is not featured anymore');
-        }
+        return back();
     }
 
 //    public function Switchsaved(Recipe $recipe, Request $request, $id)

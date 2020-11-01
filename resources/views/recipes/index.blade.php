@@ -60,21 +60,37 @@
                         </div>
                         <div class="card-footer">
                             <small class="text-muted"> <a href="recipe/{{$recipe->id}}" class="btn btn-primary">Naar het recept!</a></small>
-{{--                            @if(auth()->user()->is_admin == 0)--}}
-{{--                            @foreach($recipes->like as $recipe)--}}
 
-                          <form method="post" action="{{route('recipe.like', $recipe->id)}}">
+            @if($ShowLike)
+                          <form method="post" action="/recipes/{{$recipe->id}}/like">
                               @csrf
-                              <button type="button" class="btn btn-success">Success</button>
-                              <button type="button" class="btn btn-danger">Danger</button>
+                              @if($recipe->isLikedBy())
+                              <button type="submit" class="btn btn-secondary" disabled>Like</button>
+                                  @else
+                                  <button type="submit" class="btn btn-success">Like</button>
+                                  @endif
+                          </form>
+
+
+                              <form method="post" action="/recipes/{{$recipe->id}}/like">
+                                  @csrf
+                                  @method('DELETE')
+{{--{{dd(auth()->user())}}--}}
+                                  @if($recipe->isDislikedBy())
+                                  <button type="submit" class="btn btn-secondary" disabled>Dislike</button>
+                              @else
+                              <button type="submit" class="btn btn-danger">Dislike</button>
+                                  @endif
 
 {{--                                    <div class="form-group row">--}}
 {{--                                        <label class="switch ml-3">--}}
-{{--                                            <input name="is_liked" value="{{ $recipe->isLikedBy($user) }}" type="checkbox" onclick='submit()' @if( $recipe->isLikedBy($user)) checked @endif>--}}
+{{--                                            <input name="is_liked" value="{{ $recipe->isLikedBy($user, $recipe->id) }}" type="checkbox" onclick='submit()' @if( $recipe->isLikedBy($user)) checked @endif>--}}
 {{--                                            <span class="slider round"></span>--}}
 {{--                                        </label>--}}
 {{--                                    </div>--}}
                                 </form>
+
+                                @endif
                         </div>
                     </div>
             @endforeach

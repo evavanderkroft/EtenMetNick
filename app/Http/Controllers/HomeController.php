@@ -28,7 +28,10 @@ class HomeController extends Controller
 
         $user = user::where('id', Auth::user()->id)->first();
 
-        return view('home', compact('user'));
+        $userCreatedAt = $user->created_at;
+        $datediv = now()->diffInDays($userCreatedAt);
+
+        return view('home', compact('user', 'datediv'));
     }
 
     public function edit(User $user)
@@ -55,12 +58,17 @@ class HomeController extends Controller
 //        $this->validate($request, [
 //            'total_paid' => 'required|numeric',
 //        ]);
+        $request->validate([
+            'name' => 'required|max:255',
+            'email' => 'required|email|max:1000'
+        ]);
 
         $user = User::findOrFail($id);
         $user->update([
             'name' => $request->input('name'),
             'email' => $request->input('email'),
         ]);
+
 //        return redirect()
 //            ->route('/home');
 

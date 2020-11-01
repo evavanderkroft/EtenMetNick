@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
+use App\User;
 use Auth;
 
 class Recipe extends Model
@@ -53,14 +54,20 @@ class Recipe extends Model
         return $this->like($user, false);
     }
 
-    public function isLikedBy(User $user){
+    public function isLikedBy2(){
+
+    }
+
+    public function isLikedBy(){
+        $user = auth()->user();
         return (bool) $user->likes
             ->where('recipe_id', $this->id)
             ->where('liked', true)
-        ->count();
+            ->count();
     }
 
-    public function isDislikedBy(User $user){
+    public function isDislikedBy(){
+        $user = auth()->user();
         return (bool) $user->likes
             ->where('recipe_id', $this->id)
             ->where('liked', false)

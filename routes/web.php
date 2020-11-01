@@ -17,11 +17,16 @@ Route::get('/', function () {
     return view('welcome');
 })->name('welcome');
 
+Route::post('/recipes/{recipe}/like', 'RecipeController@storeLike');
+Route::delete('/recipes/{recipe}/like', 'RecipeController@destroyLike');
+
+
 Route::post('recipe/category', 'RecipeController@category')->name('recipe.category');
 Route::get('recipe/search', 'recipeController@search')->name('recipe.search');
 Route::get('recipe/saved', 'recipeController@Switchsaved')->name('recipe.Switchsaved');
-Route::post('recipe/available/{id}', 'recipeController@available')->name('recipe.available');
-Route::post('recipe/liked/{id}', 'recipeController@Like')->name('recipe.like');
+Route::post('recipe/available/{id}', 'RecipeController@available')->name('recipe.available');
+//Route::post('recipe/liked/{id}', 'recipeController@Like')->name('recipe.like');
+
 Route::resource('/recipe','RecipeController');
 //    ->only( ['index', 'edit','update', 'destroy', 'create', 'show' ]);
 
