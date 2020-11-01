@@ -11,7 +11,7 @@ class User extends Authenticatable
 
     use Notifiable;
 
-
+//
     public function likes(){
         return $this->hasMany(Like::class);
     }
@@ -20,29 +20,19 @@ class User extends Authenticatable
         return $this->belongsToMany('App\Recipe');
     }
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
+
+    // fillables are the inputfields for the database that can be filled in, for example, a form.
     protected $fillable = [
         'name', 'email', 'password', 'is_admin',
     ];
 
-    /**
-     * The attributes that should be hidden for arrays.
-     *
-     * @var array
-     */
+    // hidden are the inputfields that should be hidden for arrays.
     protected $hidden = [
         'password', 'remember_token',
     ];
 
-    /**
-     * The attributes that should be cast to native types.
-     *
-     * @var array
-     */
+
+    //the attributes that should be native types.
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];

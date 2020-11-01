@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -12,42 +13,27 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+//Route to the welcome page.
 Route::get('/', function () {
     return view('welcome');
 })->name('welcome');
-
-Route::post('/recipes/{recipe}/like', 'RecipeController@storeLike');
-Route::delete('/recipes/{recipe}/like', 'RecipeController@destroyLike');
-
-
-Route::post('recipe/category', 'RecipeController@category')->name('recipe.category');
-Route::get('recipe/search', 'recipeController@search')->name('recipe.search');
-Route::get('recipe/saved', 'recipeController@Switchsaved')->name('recipe.Switchsaved');
-Route::post('recipe/available/{id}', 'RecipeController@available')->name('recipe.available');
-//Route::post('recipe/liked/{id}', 'recipeController@Like')->name('recipe.like');
-
+//route to store like function.
+Route::post('/recipes/{recipe}/like', 'RecipeController@storeLike')->middleware('auth');
+//route to delete like function.
+Route::delete('/recipes/{recipe}/like', 'RecipeController@destroyLike')->middleware('auth');
+//route to find categories in recipes.
+Route::post('recipe/category', 'RecipeController@category')->name('recipe.category')->middleware('auth');
+//route to find recipes by letter.
+Route::get('recipe/search', 'recipeController@search')->name('recipe.search')->middleware('auth');
+//route to toggle the availability of the recipe.
+Route::post('recipe/available/{id}', 'RecipeController@available')->name('recipe.available')->middleware('auth');
+//route to everything further related to the recipe (index, edit, create, update, destroy, show).
 Route::resource('/recipe','RecipeController');
-//    ->only( ['index', 'edit','update', 'destroy', 'create', 'show' ]);
 
-//Route::POST('/recipe', 'RecipeController@category')->name('recipe.category');
-//Route::POST('/recipe', 'RecipeController@store')->name('recipe.store');
-//Route::get('recipe', 'RecipeController@show') ->name('recipe');
-Route::get('newAccount', "newAccountController@show") ->name('newAccount');
-Route::get('Login', "loginController@show") ->name('login');
-
-//Route::get('/delete/{recipe_id}',
-//    ['uses' =>'RecipeController@destroy',
-//    'as' => 'recipe.delete',
-//        'middelware' => 'auth'
-//]);
-
-
-
+//route to everything that has to do with authentication.
 Auth::routes();
-//Route::resource('/home', 'HomeController');
-Route::resource('/home', 'HomeController', ['only' => ['index', 'edit','update']]);
-Route::resource('/admin', 'AdminController');
-//Route::put('/home', 'HomeController@update')->name('home.update');
-//Route::get('admin/routes', 'HomeController@admin')->middleware('admin');
-//Route::get('home', 'HomeController@edit')->name('homeEdit');
+//route to the edit data from the user. Only using the index, edit and update function.
+Route::resource('/home', 'HomeController', ['only' => ['index', 'edit','update']])->middleware('auth');
+//Route to the admin page. Only available for the admin when logged in.
+Route::resource('/admin', 'AdminController')->middleware('auth');
+

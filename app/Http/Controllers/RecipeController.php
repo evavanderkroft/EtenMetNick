@@ -9,15 +9,13 @@ use Auth;
 
 class RecipeController extends Controller
 {
-
+//intiates the auth middelware. (making auth available everywhere)
     public function __construct()
     {
         $this->middleware('auth');
     }
-//    public function index(){
-//        return
-//    }
 
+    //index function. Shows the indexpage of the recipes.
     public function index(Recipe $recipe)
     {
         $recipes = Recipe::Where('is_available', 1)
@@ -39,77 +37,46 @@ class RecipeController extends Controller
            {
            $ShowLike= false;
            }
-//
-//        $fdate = User::Where('created_at');
-//        $datetime1 = new DateTime($fdate);
-//        $datetime2 = new DateTime(date('Y/m/d'));
-//
-//        $interval = $datetime1->diff($datetime2);
-//        $days = $interval->format('%a');//now do whatever you like with $days
-//
 
-//        'title', 'like', '%' . $request->search . '%'
-//        dd($recipes);
-//     $search = Recipe::get('title');
-//     $recipes=Recipe::search()->orderBy('name')->paginate(20);
-
-//     $recipeSearch = Recipe::where('title', 'like', '%'.$search.'%')
-//         ->orderBy('recipe')
-//         ->paginate(20);
         return view('recipes.index', compact('recipes','user', 'ShowLike'));
 
-//        $recipes = Recipe::table('recipes')->get();
-
-
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
+    //check if you, as a user, are logged in. If you are, you will go on to recipes.create, if not you will return to the index.
     public function create()
     {
-        if (Auth::check()) {
+
             return view('recipes.create');
-        } else {
-            return view('recipes.index');
-        }
     }
 
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\Response
-     */
+    //function to store the information given by the admin to make a recipe. Without validation there won't be anything saved.
     public function store(Request $request)
     {
+        //if the recipe is not available, the $isAvailable variable is 0, if it is available, it is 1.
         if (!$request->is_available) {
         $isAvailable = 0;
     } else {
         $isAvailable = 1;
     }
-//        if (!$request->is_saved) {
-//            $isSaved = 0;
-//        } else {
-//            $isSaved = 1;
-//        }
+        //the inputfields will be validated. If not filled in correctly, it will show an error.
+        $request->validate([
+            'title' => 'required|max:255',
+            'short_description' => 'required|max:255',
+            'description' => 'required|max:1000',
+            'category'=>'required'
+        ]);
 
+    //the requests to create the recipe items for the database. This will create a new recipe.
       $recipe =  Recipe::create([
-            'user_id' => Auth::user()->id,
             'title' => $request->title,
             'short_description' => $request->short_description,
             'description' => $request->description,
             'category' => $request->category,
             'is_available' => $isAvailable
-//            'is_saved'=> $isSaved
-//        'image' =>
-        ]);
-//        $recipe->tags()->sync(request('tag'));
 
-//        dd($request->category);
+        ]);
+
         return redirect('/recipe');
 
 
@@ -128,11 +95,13 @@ class RecipeController extends Controller
      * @param \App\Recipe $recipe
      * @return \Illuminate\Http\Response
      */
+    //function to edit. This will send the admin to the recipes.edit page.
     public function edit(Recipe $recipe)
     {
         return view('recipes.edit', compact('recipe'));
     }
 
+    //function to show only one recipe in detail. This will send the user to the recipes.show page.
     public function show($id)
     {
         $recipe = Recipe::find($id);
@@ -146,44 +115,24 @@ class RecipeController extends Controller
      * @param \App\Recipe $recipe
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request,
-                           Recipe $recipe
-//                           ,$id
-    )
-    {
-//        dd($request);
 
+    //edit/update function. Will make the admin able to edit the recipes by title, short and normal description and by category.
+    public function update(Request $request, Recipe $recipe)
+    {
+        //validate if the title, description and short description are filled in. if not, it shows an error.
         $request->validate([
             'title' => 'required|max:255',
             'description' => 'required|max:1000',
             'short_description' => 'required|max:255',
+            'category'=>'required'
         ]);
 
-//        $recipe = Recipe::find($id);
-//        $recipe->update([
-//            'title' => $request->input('title'),
-//            'description' => $request->input('description'),
-//            'short_description' => $request->input('short_description')
-//        ]);
-//        dd("hoi");
-
-//        $recipe=Recipe::find($id);
-//        $recipe->title = $request->get('title');
-//        $recipe->short_description = $request->get('short_description');
-//        $recipe->description = $request->get('description');
-//        $recipe->img = $request->get('img');
-//        $recipe->save();
-
+        //updates the request send by the admin. If done correctly without errors, it will update the data in database and redirect.
         $recipe->update(request(['title', 'description', 'short_description', 'category']));
         return redirect('/recipe')->with('succes!', 'recept is aangepast');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param \App\Recipe $recipe
-     * @return \Illuminate\Http\Response
-     */
+    //function to destroy the recipe. This is only able by the admin.
     public function destroy($id)
     {
         $recipe = Recipe::find($id);
@@ -191,12 +140,12 @@ class RecipeController extends Controller
         return redirect('/recipe');
     }
 
+
+//    function for categories. The user can now choose between categories of types of food.
     public function category(Recipe $recipe, Request $request)
     {
-//dd($request);
+        //made sure that the like and dislike buttons are able to operate.
         $user = Auth::user();
-
-
         $user2 = User::where('id', $user->id)->first();
         $userCreatedAt = $user2->created_at;
         $datediv = now()->diffInDays($userCreatedAt);
@@ -209,18 +158,24 @@ class RecipeController extends Controller
         {
             $ShowLike= false;
         }
-        $recipes = Recipe::where('category', $request->category)
-            ->where('is_available', 1)
-            ->get();
-//dd($recipes);
+        //show the recipes where the request is the same as the category in the dropdown.
+
+        if ($request->category =="Geen categorie"){
+            $recipes =Recipe::where('is_available', 1)->get();
+        } else{
+            $recipes = Recipe::where('category', $request->category)
+                ->where('is_available', 1)
+                ->get();
+        }
         return view('recipes.index', compact('recipes', 'ShowLike'));
     }
 
+
+    //Search function. This makes it able to search in the recipes. This can be done in title as well as in short Description.
     public function search(Recipe $recipe, Request $request)
     {
+        //made sure that the like and dislike buttons are able to operate.
         $user = Auth::user();
-
-
         $user2 = User::where('id', $user->id)->first();
         $userCreatedAt = $user2->created_at;
         $datediv = now()->diffInDays($userCreatedAt);
@@ -235,6 +190,7 @@ class RecipeController extends Controller
         }
         $search = $request->get('search');
 
+        //make sure that the letter typed is "like" the title or the short description, but only from the ones available.
         $recipes = Recipe::where('title', 'like', '%' . $request->search . '%')->orWhere('short_description', 'like', '%' . $request->search . '%')
             ->where('is_available', 1)
             ->get();
@@ -242,10 +198,10 @@ class RecipeController extends Controller
         return view('recipes.index', compact('recipes', 'ShowLike'));
     }
 
+
+    //function to make the recipe available for the users. This can only be done by the admin in adminscreen.
     public function available(Recipe $recipe, Request $request, $id)
     {
-//        dd($id);
-//        dd($request->all());
         $Available = $request->input('is_available');
         $recipe = Recipe::find($id);
 
@@ -263,58 +219,18 @@ class RecipeController extends Controller
             return redirect('/admin')->with('warning', 'This recipe is not featured anymore');
         }
     }
-//    public function Like(Recipe $recipe, Request $request, $id)
-//    {
-////        dd($id);
-////        dd($request->all());
-//        $Liked = $request->input('is_liked');
-//        $recipe = Recipe::find($id);
-//
-//        if (isset($Liked)) {
-//            // Feature recipe
-//            $recipe->like(Auth::user());
-//            $recipe->save();
-//
-//            return redirect('/recipe')->with('success', 'This recipe is now featured');
-//        } else {
-//            // Unfeature recipe
-//            $recipe->dislike(Auth::user());
-//            $recipe->save();
-//
-//            return redirect('/recipe')->with('warning', 'This recipe is not featured anymore');
-//        }
-//    }
-
+//function to store the like. This will be used to remember if the user has liked the recipe or not.
     public function storeLike(Recipe $recipe){
         $recipe->like(auth()->user());
 
         return back();
     }
+
+    //function to destroy the like. This will be used to destroy the like and make sure it will be disliked.
     public function destroyLike(Recipe $recipe){
         $recipe->dislike(auth()->user());
 
         return back();
     }
-
-//    public function Switchsaved(Recipe $recipe, Request $request, $id)
-//    {
-//        $Saved = $request->input('is_saved');
-//        $recipe = Recipe::find($id);
-//
-//        if (isset($Saved)) {
-//            // Feature recipe
-//            $recipe->is_saved = 1;
-//            $recipe->save();
-//
-//            return redirect('/index')->with('success', 'This recipe is now saved');
-//        } else {
-//            // Unfeature recipe
-//            $recipe->is_saved = 0;
-//            $recipe->save();
-//
-//            return redirect('/index')->with('warning', 'This recipe is not saved anymore');
-//        }
-////        return view('recipes.saved');
-//    }
 }
 

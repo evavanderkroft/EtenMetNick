@@ -3,6 +3,8 @@
 namespace App\Http\Middleware;
 
 use Illuminate\Auth\Middleware\Authenticate as Middleware;
+use Illuminate\Support\Facades\View;
+
 
 class Authenticate extends Middleware
 {
@@ -16,7 +18,7 @@ class Authenticate extends Middleware
     {
         if (! $request->expectsJson()) {
             View::share([ 'currentUser' => $this->auth->user() ]);
-            return route('login');
+            return route('welcome');
         }
     }
 }

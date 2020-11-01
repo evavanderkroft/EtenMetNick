@@ -13,15 +13,15 @@
 
     </head>
     <body>
-    <div class="container">
     @section('content')
+    <div class="container">
             <div class="content main">
                 <div class="title">
                     Eten met nick
                 </div>
 
                 <div class="description">
-                   <p>Welkom op de Eten met Nick recepten pagina! Hier worden de recepten van Nick Toet op laten zien. Om te reageren moet je een account aanmaken. </p>
+                   <p>Welkom op de Eten met Nick recepten pagina! Hier worden de recepten van Nick Toet op laten zien. Om de recepten te zien moet je een account aanmaken. </p>
                 </div>
 
                 <div class="links">
@@ -34,7 +34,7 @@
         </div>
         @endsection
 
-    </div>
+
     @section('footer')
         @endsection
     </body>

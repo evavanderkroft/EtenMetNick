@@ -5,8 +5,8 @@
 
     <div class="container">
 
-        <h1 class="title">Edit a post</h1>
-        <h2 class="subtitle">Upload your new photo to add on your post board.</h2>
+        <h1 class="title">Pas het recept aan.</h1>
+        <h2 class="subtitle">Verander de gegevens van het recept:</h2>
 
         {{-- {{ Auth::user()->id }} --}}
         <form class="box" method="POST" action="/recipe/{{$recipe->id}}" enctype="multipart/form-data">
@@ -39,7 +39,6 @@
             <div class="form-group">
                 <label for="exampleFormControlSelect1">Categorie</label>
                 <select class="form-control" id="exampleFormControlSelect1" name="category"  value="{{$recipe->category }}">
-                    <option>None</option>
                     <option>Frans</option>
                     <option>spaans</option>
                     <option>Chinees</option>
@@ -47,24 +46,6 @@
                     <option>Italiaans</option>
                 </select>
             </div>
-
-
-{{--            <label class="label">Upload your photo</label>--}}
-{{--            <div class="file field has-name is-boxed">--}}
-{{--                <label class="file-label">--}}
-{{--                <span class="file-cta">--}}
-{{--                    <span class="file-icon">--}}
-{{--                        <i class="fas fa-upload"></i>--}}
-{{--                    </span>--}}
-{{--                    <span class="file-label">--}}
-{{--                        Your photo--}}
-{{--                    </span>--}}
-{{--                </span>--}}
-{{--                    <span class="file-name">--}}
-{{--                    {{ $recipe->image }}--}}
-{{--                </span>--}}
-{{--                </label>--}}
-{{--            </div>--}}
 
             <div>
                 <div>

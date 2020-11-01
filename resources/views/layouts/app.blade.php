@@ -60,15 +60,8 @@
 
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-{{--                                    //Naar de opgeslagen recepten (alleen als gebruiker)--}}
-                                    @if(auth()->user()->is_admin == 0)
-                                        <a class="dropdown-item"
-                                            href="{{route('recipe.Switchsaved')}}"
-                                        >
-                                            {{ __('Opgeslagen recepten') }}</a>
-                                    @endif
 
-{{--                                    //naar de adminpagina als admin en naar de account aanpassen pagina als gebruiker--}}
+{{--                                   //naar de adminpagina als admin en naar de account aanpassen pagina als gebruiker--}}
                                     @if(auth()->user()->is_admin == 1)
                                         <a class="dropdown-item" href="{{ route('admin.index') }}">
                                             {{ __('Admin pagina') }}
@@ -83,7 +76,7 @@
                                         <a class="dropdown-item" href="{{ route('logout') }}"
                                            onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
-                                            {{ __('Logout') }}
+                                            {{ __('Uitloggen') }}
                                         </a>
 
 

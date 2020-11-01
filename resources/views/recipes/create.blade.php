@@ -33,7 +33,6 @@
         <div class="form-group">
             <label for="exampleFormControlSelect1">Categorie</label>
             <select class="form-control" id="exampleFormControlSelect1" name="category" required value="{{old('category')}}">
-                <option>None</option>
                 <option>Frans</option>
                 <option>spaans</option>
                 <option>Chinees</option>
@@ -71,6 +70,16 @@
         </div>
     </form>
     </div>
+
+    @if ($errors->any())
+        <div>
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
 
 
 @endsection
